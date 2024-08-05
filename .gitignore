@@ -25,5 +25,5 @@ dist-ssr
 
 # Secrets, secrets
 *.env
-
+*.venv
 *__pycache__
