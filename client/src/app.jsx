@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Login from "./pages/login";
 import Home from "./pages/home";
+import { UserProvider } from "./context/user-context";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -25,11 +26,14 @@ function App() {
 
   return (
     <>
-    {user ? (
-      <Home />
-    ):(
-      <Login />
-    )}
+      <UserProvider>
+        {user ? (
+          <Home />
+        ):(
+          <Login />
+        )}
+      </UserProvider>
+    
       <div>
         <p>Hello</p>
         <label>Current Users: </label>

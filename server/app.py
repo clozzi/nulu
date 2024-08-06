@@ -25,9 +25,8 @@ api.add_resource(Login, '/api/login')
 
 class Signup(Resource):
     def post(self):
-        get_json = request.get_json()
-        name = get_json.get('name')
-        password = get_json.get('password')
+        name = request.get_json()['name']
+        password = request.get_json()['password']
         user = User.query.filter_by(name=name).first()
         if user:
             return {'error': 'Username taken.'}, 400
@@ -40,7 +39,7 @@ class Signup(Resource):
                 db.session.add(new_user)
                 db.session.commit()
                 session['user_id'] = new_user.id
-                return new_user, 200
+                return new_user.to_dict(), 200
             except:
                 return {'error': 'Could not create user'}, 400
 api.add_resource(Signup, '/api/signup')
@@ -50,7 +49,7 @@ class CheckSession(Resource):
         id = session.get('user_id')
         if id:
             user = User.query.filter_by(id=id).first()
-            return user
+            return user.to_dict()
         else:
             return {'error': 'Not Authorized'}, 401
 api.add_resource(CheckSession, '/api/check_session')
@@ -65,13 +64,11 @@ api.add_resource(Logout, '/api/logout')
 class Users(Resource):
     def get(self):
         users = [user.to_dict() for user in User.query.all()]
-        print(users)
         return users, 200
 api.add_resource(Users, '/api/users')
 
 class Medias(Resource):
     def get(self):
         medias = [media.to_dict() for media in Media.query.all()]
-        print(medias)
         return medias, 200
 api.add_resource(Medias, '/api/medias')

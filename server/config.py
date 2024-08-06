@@ -18,7 +18,7 @@ app = Flask(
 db = SQLAlchemy()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
-# app.secret_key = os.getenv('SECRET_KEY')
+app.secret_key = os.getenv('SECRET_KEY')
 app.json.compact = False
 
 migrate = Migrate(app, db)
