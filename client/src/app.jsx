@@ -49,7 +49,7 @@ function App() {
           <ul>
             {medias.map((media) => (
               <li key={media.id}>
-                {media.name}
+                {media.title}
               </li>
             ))}
           </ul>
