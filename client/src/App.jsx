@@ -16,15 +16,17 @@ function App() {
       <div>
         <p>Hello</p>
         <label>Current Users: </label>
-        <ol>
-          {users.length > 0 ? (
-            users.map(user => (
-              <li key={user.id}>{user.name}</li>
-            ))
-          ) : (
-            <p>No Users</p>
-          )}
-        </ol>
+        {users.length > 0 ? (
+          <ul>
+            {users.map((user) => (
+              <li key={user.id}>
+                {user.name}
+              </li>
+            ))}
+          </ul>
+        ): (
+          <p>No Users</p>
+        )}
       </div>
     </>
   )
