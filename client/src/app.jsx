@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import Login from "./pages/login";
+import Home from "./pages/home";
 
 function App() {
+  const [user, setUser] = useState(null)
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -8,11 +11,17 @@ function App() {
     .then(r => r.json())
     .then(data => {
       setUsers(data)
+      // setUser(data[0])
     })
-  }, [])
+  }, []);
 
   return (
     <>
+    {user ? (
+      <Home />
+    ):(
+      <Login />
+    )}
       <div>
         <p>Hello</p>
         <label>Current Users: </label>
@@ -29,7 +38,7 @@ function App() {
         )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
