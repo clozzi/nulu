@@ -4,8 +4,8 @@ from config import db
 
 user_medias = db.Table(
     "users_medias",
-    db.Column("user_id", db.ForeignKey("user.id"), primary_key=True),
-    db.Column("media_id", db.ForeignKey("media.id"), primary_key=True),
+    db.Column("user_id", db.ForeignKey("users.id"), primary_key=True),
+    db.Column("media_id", db.ForeignKey("medias.id"), primary_key=True),
 )
 
 class User(db.Model, SerializerMixin):
@@ -26,6 +26,8 @@ class Media(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     description = db.Column(db.String)
+    media_type = db.Column(db.String)
+    genre = db.Column(db.String)
     img = db.Column(db.String)
     users = db.relationship('User', secondary=user_medias, back_populates="medias")
 
