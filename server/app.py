@@ -1,7 +1,7 @@
 from config import app, api
-from flask import make_response, render_template
+from flask import render_template
 from flask_restful import Resource
-from models import User
+from models import User, Media
 
 
 @app.errorhandler(404)
@@ -14,3 +14,10 @@ class Users(Resource):
         print(users)
         return users, 200
 api.add_resource(Users, '/api/users')
+
+class Medias(Resource):
+    def get(self):
+        medias = [media.to_dict() for media in Media.query.all()]
+        print(medias)
+        return medias, 200
+api.add_resource(Medias, '/api/medias')

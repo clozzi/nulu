@@ -3,17 +3,25 @@ import Login from "./pages/login";
 import Home from "./pages/home";
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
+  const [medias, setMedias] = useState([]);
 
   useEffect(() => {
     fetch('/api/users')
     .then(r => r.json())
     .then(data => {
       setUsers(data)
-      // setUser(data[0])
     })
   }, []);
+
+  useEffect(() => {
+    fetch('/api/medias')
+    .then(r => r.json())
+    .then(data => {
+      setMedias(data)
+    })
+  }, [])
 
   return (
     <>
@@ -35,6 +43,18 @@ function App() {
           </ul>
         ): (
           <p>No Users</p>
+        )}
+        <label>Current Media: </label>
+        {medias.length > 0 ? (
+          <ul>
+            {medias.map((media) => (
+              <li key={media.id}>
+                {media.name}
+              </li>
+            ))}
+          </ul>
+        ): (
+          <p>No Media</p>
         )}
       </div>
     </>
