@@ -15,6 +15,7 @@ python-dotenv = "*"
 sqlalchemy = "*"
 sqlalchemy-serializer = "*"
 psycopg2-binary = "*"
+honcho = "*"
 
 [dev-packages]
 

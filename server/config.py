@@ -10,7 +10,7 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__, static_folder='../client/dist', static_url_path='/')
+app = Flask(__name__, static_folder='../client/dist', static_url_path='', template_folder='../client/build')
 db = SQLAlchemy()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
